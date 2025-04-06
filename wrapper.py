@@ -26,7 +26,6 @@ def run_calculation(num_samples, num_partitions):
     return absolute_error
 
 
-# Experiment 1: Varying number of samples with fixed partitions
 fixed_partitions = 8
 sample_sizes = [10**i for i in range(1, 8)]
 sample_errors = []
@@ -35,7 +34,6 @@ for samples in sample_sizes:
     error = run_calculation(samples, fixed_partitions)
     sample_errors.append(error)
 
-# Experiment 2: Varying number of partitions with fixed number of samples
 fixed_samples = 1000000
 partition_sizes = [2**i for i in range(1, 8)]
 partition_errors = []
@@ -44,12 +42,11 @@ for partitions in partition_sizes:
     error = run_calculation(fixed_samples, partitions)
     partition_errors.append(error)
 
-# Plotting the errors
 plt.figure(figsize=(15, 10))
 
 plt.subplot(2, 2, 1)
 plt.plot(sample_sizes, sample_errors, "bo-")
-plt.title(f"Accuracy vs Number of Samples (Partitions={fixed_partitions})")
+plt.title(f"Absolute Error vs Number of Samples (Partitions={fixed_partitions})")
 plt.xlabel("Number of Samples")
 plt.ylabel("Absolute Error")
 plt.xscale("log")
@@ -57,7 +54,7 @@ plt.grid(True)
 
 plt.subplot(2, 2, 2)
 plt.plot(partition_sizes, partition_errors, "ro-")
-plt.title(f"Accuracy vs Number of Partitions (Samples={fixed_samples:,})")
+plt.title(f"Absolute Error vs Number of Partitions (Samples={fixed_samples:,})")
 plt.xlabel("Number of Partitions")
 plt.ylabel("Absolute Error")
 plt.grid(True)
