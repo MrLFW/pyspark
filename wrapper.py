@@ -1,11 +1,19 @@
+import os
 import subprocess
 import math
 import matplotlib.pyplot as plt
 
+python_executable = os.path.expanduser("~/opt/anaconda3/envs/pyspark_env/bin/python")
+
 
 def run_calculation(num_samples, num_partitions):
     result = subprocess.run(
-        ["python", "pi_template.py", str(num_samples), str(num_partitions)],
+        [
+            python_executable,
+            "calculate.py",
+            str(num_samples),
+            str(num_partitions),
+        ],
         capture_output=True,
         text=True,
     )
@@ -50,6 +58,7 @@ plt.title(f"Absolute Error vs Number of Samples (Partitions={fixed_partitions})"
 plt.xlabel("Number of Samples")
 plt.ylabel("Absolute Error")
 plt.xscale("log")
+plt.yscale("log")
 plt.grid(True)
 
 plt.subplot(2, 2, 2)

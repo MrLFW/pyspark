@@ -13,8 +13,8 @@ NUM_PARTITIONS = int(sys.argv[2])
 
 sc = SparkContext(appName="miPi")
 samples_rdd = sc.parallelize(range(NUM_SAMPLES), NUM_PARTITIONS)
-sc.stop()
-
 count = samples_rdd.map(lambda _: sample(0)).reduce(lambda a, b: a + b)
+
+sc.stop()
 
 print("Pi:" + str(NUM_SAMPLES) + ":" + str(4.0 * count / NUM_SAMPLES))
